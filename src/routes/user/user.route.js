@@ -1,9 +1,8 @@
 import { Router } from "express";
+import { findAllUser } from "../../controllers/user/user.Controller.js";
 
 const route = Router();
 
-route.get("/user", (_req, res) => {
-	return res.status(201).json({ message: "User created successfully." });
-});
+route.get("/user", findAllUser);
 
 export default route;
