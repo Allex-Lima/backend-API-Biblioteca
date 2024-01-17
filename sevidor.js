@@ -1,10 +1,10 @@
 import express from "express";
+import route from "./src/routes/user/user.route.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (_req, res) => {
-	return res.status(200).json({message: "Hello World..."});
-});
+app.use(route);
+
 export default app;
