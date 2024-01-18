@@ -1,5 +1,8 @@
 import app from "./sevidor.js";
+import "dotenv/config";
+import connectDatabase from "./src/database/db.js";
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`--> Servidor rodando em http://localhost:${port}`));
+connectDatabase();
+app.listen(port, () => console.log(`--> SERVER RUN IN http://localhost:${port}`));
