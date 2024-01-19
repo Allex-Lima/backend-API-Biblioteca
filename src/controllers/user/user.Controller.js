@@ -1,13 +1,15 @@
-import { userService } from "../../services/user/user.Service.js";
+import { createUserService, findAllUserService } from "../../services/user/user.Service.js";
 
-export const findAllUser = (_req, res) => {
-	return res.status(200).json({ message: "Find all users." });
+export const findAllUser = async (_req, res) => {
+	const users = await findAllUserService();
+
+	return res.status(200).json(users);
 };
 
 export const createUser = async (req, res) => {
 	
 	try {
-		const result  = await userService(req.body);
+		const result  = await createUserService(req.body);
 
 		if (!result) {
 			return res.status(404).json({ message: "The fields has to be filled." });
