@@ -1,6 +1,6 @@
-import { createUserRepository } from "../../repositories/user/user.Repository.js";
+import { createUserRepository, findAllUserRepository } from "../../repositories/user/user.Repository.js";
 
-export const userService = async (dataUser) => {
+export const createUserService = async (dataUser) => {
 	try {
 		const { name, email, password } = dataUser;
 		
@@ -16,3 +16,14 @@ export const userService = async (dataUser) => {
 		return { message: error.message };
 	}
 };
+
+export const findAllUserService = async () => {
+	try {
+		const allUser = await findAllUserRepository();
+
+		return allUser;
+	} catch (error) {
+		return {message: error.message};
+	}
+};
+
