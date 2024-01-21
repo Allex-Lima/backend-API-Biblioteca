@@ -6,12 +6,13 @@ export const createUserService = async (dataUser) => {
 		const { error }  = validation.validate(dataUser);
 		
 		if (error) {
-			return { message: error.message.replace(/\\/g, "").replace(/"/g, "") };
+			return error;
 		}
 
 		await createUserRepository(dataUser);
 
-		return { message: "User added with successfully.",};
+		// return { message: "User added with successfully."};
+		return true;
 
 	} catch (error) {
 		if (error.message) {
