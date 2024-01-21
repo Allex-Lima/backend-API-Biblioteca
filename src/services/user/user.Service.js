@@ -1,18 +1,22 @@
 import { createUserRepository, findAllUserRepository } from "../../repositories/user/user.Repository.js";
+import { validation } from "../../validate/validate.js";
 
 export const createUserService = async (dataUser) => {
 	try {
-		const { name, email, password } = dataUser;
+		const { error }  = validation.validate(dataUser);
 		
-		if (!name || !email || !password) {
-			return false;
+		if (error) {
+			return { message: error.message.replace(/\\/g, "").replace(/"/g, "") };
 		}
 
-		const createUser = await createUserRepository(dataUser);
+		await createUserRepository(dataUser);
 
-		return createUser;
+		return { message: "User added with successfully.",};
 
 	} catch (error) {
+		if (error.message) {
+			return { message: "Data already existing." };
+		}
 		return { message: error.message };
 	}
 };
@@ -22,6 +26,7 @@ export const findAllUserService = async () => {
 		const allUser = await findAllUserRepository();
 
 		return allUser;
+
 	} catch (error) {
 		return {message: error.message};
 	}
