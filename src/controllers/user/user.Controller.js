@@ -16,7 +16,7 @@ export const createUser = async (req, res) => {
 		const result = await createUserService(req.body);
 		
 		if (result.message) {
-			return res.status(400).json({ message: result.message.replace(/\\/g, "").replace(/"/g, "|") });
+			return res.status(400).json({ message: result.message.replace(/\\/g, "").replace(/"/g, "") });
 
 		}
 		return res.status(201).json({ message: "User added with successfully."});
