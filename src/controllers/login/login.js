@@ -12,7 +12,7 @@ const login = async (req, res) => {
 			return res.status(404).json({ message: "Email or password invalid." });
 		}
 
-		return res.status(201).json({ message: "logged with successfully." });
+		return res.status(201).json({ message: result });
 
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
