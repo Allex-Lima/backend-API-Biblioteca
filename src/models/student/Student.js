@@ -12,7 +12,7 @@ const StudentSchema = new Schema({
 		unique: true
 	},
 	registration: {
-		type: Number,
+		type: String,
 		required: true
 	}
 });
