@@ -1,8 +1,9 @@
 import { createStudentService } from "../../services/student/student.service.js";
+import { generateRegistration } from "../../utils/generateRegistration.js";
 
 export const createStudent = async (req, res) => {
 	try {
-		const registration = "2024";
+		const registration = generateRegistration();
 		const { name, email } = req.body;
 		const dataStudent = {
 			name,
