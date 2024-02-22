@@ -4,6 +4,7 @@ import { generateRegistration } from "../../utils/generateRegistration.js";
 export const createStudent = async (req, res) => {
 	try {
 		const registration = generateRegistration();
+		
 		const { name, email } = req.body;
 		const dataStudent = {
 			name,
@@ -12,6 +13,10 @@ export const createStudent = async (req, res) => {
 		};
 
 		const result = await createStudentService(dataStudent);
+
+		if (result.message) {
+			return res.status(400).json({ message: result.message.replace(/\\/g, "").replace(/"/g, "") });
+		}
 
 		return res.status(201).json(result);
 
