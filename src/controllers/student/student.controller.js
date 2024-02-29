@@ -1,4 +1,7 @@
-import { createStudentService } from "../../services/student/student.service.js";
+import { 
+	createStudentService,
+	findAllStudentService
+} from "../../services/student/student.service.js";
 import { generateRegistration } from "../../utils/generateRegistration.js";
 
 export const createStudent = async (req, res) => {
@@ -24,4 +27,14 @@ export const createStudent = async (req, res) => {
 		return res.status(500).json({message: error.message });
 	}
     
+};
+
+export const findAllStudent = async (req, res) => {
+	try {
+		const result = await findAllStudentService();
+
+		return res.status(200).json(result);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
 };

@@ -1,4 +1,7 @@
-import { createStudentRepository } from "../../repositories/student/student.Repository.js";
+import { 
+	createStudentRepository,
+	findAllStudentRepository
+} from "../../repositories/student/student.Repository.js";
 
 import { validationStudents } from "../../validate/validate.js";
 
@@ -14,5 +17,16 @@ export const createStudentService = async (dataStudent) => {
 		return result;
 	} catch (error) {
 		return { message : error.message };
+	}
+};
+
+export const findAllStudentService = async () => {
+	try {
+		const allStudent = await findAllStudentRepository();
+
+		return allStudent;
+
+	} catch (error) {
+		return { message: error.message };
 	}
 };
