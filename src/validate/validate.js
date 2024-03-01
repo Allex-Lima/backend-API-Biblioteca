@@ -27,4 +27,3 @@ export const validationStudents = Joi.object({
 	...validationBase,
 	...validationRegistration,
 });
-

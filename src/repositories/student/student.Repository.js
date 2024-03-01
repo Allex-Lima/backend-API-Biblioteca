@@ -5,3 +5,5 @@ export const createStudentRepository = (dataStudent) => Student.create(dataStude
 export const findAllStudentRepository = () => Student.find();
 
 export const findStudentByRegistrationRepository = (registration) => Student.findOne({ registration: registration });
+
+export const updateStudentRepository = (registration, dataStudent) => Student.findOneAndUpdate(registration, { $set: dataStudent}, {new: true});

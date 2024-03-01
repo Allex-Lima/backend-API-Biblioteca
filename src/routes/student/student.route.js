@@ -2,7 +2,8 @@ import { Router } from "express";
 import { 
 	createStudent,
 	findAllStudent, 
-	findStudentByRegistration
+	findStudentByRegistration,
+	updateStudent
 } from "../../controllers/student/student.controller.js";
 
 const route = Router();
@@ -10,5 +11,6 @@ const route = Router();
 route.post("/user/student", createStudent);
 route.get("/user/student", findAllStudent);
 route.get("/user/student/:registration", findStudentByRegistration);
+route.patch("/user/student/:registration", updateStudent);
 
 export default route;
