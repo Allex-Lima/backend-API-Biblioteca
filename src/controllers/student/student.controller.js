@@ -1,7 +1,8 @@
 import { 
 	createStudentService,
 	findAllStudentService,
-	findStudentByRegistrationService
+	findStudentByRegistrationService,
+	updateStudentService
 } from "../../services/student/student.service.js";
 import { generateRegistration } from "../../utils/generateRegistration.js";
 
@@ -50,6 +51,40 @@ export const findStudentByRegistration = async (req, res) => {
 			return res.status(404).json({ message: "Student not found."});
 		}
 		return res.status(200).json(result);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const updateStudent = async (req, res) => {
+	
+	try {
+		const { registration } = req.params;
+
+		const registrationStudent = {
+			registration,
+		};
+		
+		const {name, email } = req.body;
+
+		const objStudent = {
+			name,
+			email,
+			registration,
+		};
+
+		const result = await updateStudentService(objStudent, registrationStudent);
+		
+		if (result.message) {
+			return res.status(400).json({ message: result.message.replace(/\\/g, "").replace(/"/g, "") });
+		}
+		
+		if (result.length === 0) {
+			return res.status(404).json({ message: "Student not found." });
+		}
+
+		return res.status(200).json(result);
+
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
 	}
