@@ -1,5 +1,6 @@
 import { 
 	createStudentService,
+	deleteStudentService,
 	findAllStudentService,
 	findStudentByRegistrationService,
 	updateStudentService
@@ -82,6 +83,21 @@ export const updateStudent = async (req, res) => {
 		if (result.length === 0) {
 			return res.status(404).json({ message: "Student not found." });
 		}
+
+		return res.status(200).json(result);
+
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const deleteStudent = async (req, res) => {
+	try {
+		const {registration} = req.params;
+
+		const { id } = await findStudentByRegistrationService(registration);
+
+		const result = await deleteStudentService(id);
 
 		return res.status(200).json(result);
 

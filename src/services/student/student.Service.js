@@ -1,5 +1,6 @@
 import { 
 	createStudentRepository,
+	deleteStudentRepository,
 	findAllStudentRepository,
 	findStudentByRegistrationRepository,
 	updateStudentRepository
@@ -64,6 +65,20 @@ export const updateStudentService = async (dataStudent, registration) => {
 		if (error.code === 11000) {
 			return {message: "Data duplicated."};
 		}
+		return { message: error.message };
+	}
+};
+
+export const deleteStudentService = async (registration) => {
+	try {
+		if (!registration) {
+			return {message: "Registration not found."};
+		}
+		await deleteStudentRepository(registration);
+
+		return { message: "Student deleted successfylly." };
+
+	} catch (error) {
 		return { message: error.message };
 	}
 };
