@@ -2,6 +2,7 @@ import {
 	createStudentRepository,
 	deleteStudentRepository,
 	findAllStudentRepository,
+	findStudentByNameRepository,
 	findStudentByRegistrationRepository,
 	updateStudentRepository
 } from "../../repositories/student/student.Repository.js";
@@ -34,15 +35,27 @@ export const findAllStudentService = async () => {
 	}
 };
 
-export const findStudentByRegistrationService = async (registration) => {
+export const findStudentByRegistrationService = async (data) => {
 	try {
-		const student = await findStudentByRegistrationRepository(registration);
+		const student = await findStudentByRegistrationRepository(data);
 
 		if (!student) {
 			return [];
 		}
 
 		return student;
+	} catch (error) {
+		return { message: error.message };
+	}
+};
+
+export const findStudentByNameService = async (name) => {
+	try {
+		const student = await findStudentByNameRepository(name);
+		if (!name) return [];
+
+		return student;
+		
 	} catch (error) {
 		return { message: error.message };
 	}

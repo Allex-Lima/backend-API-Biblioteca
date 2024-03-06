@@ -2,6 +2,7 @@ import {
 	createStudentService,
 	deleteStudentService,
 	findAllStudentService,
+	findStudentByNameService,
 	findStudentByRegistrationService,
 	updateStudentService
 } from "../../services/student/student.service.js";
@@ -32,7 +33,7 @@ export const createStudent = async (req, res) => {
     
 };
 
-export const findAllStudent = async (req, res) => {
+export const findAllStudent = async (_req, res) => {
 	try {
 		const result = await findAllStudentService();
 
@@ -52,6 +53,24 @@ export const findStudentByRegistration = async (req, res) => {
 			return res.status(404).json({ message: "Student not found."});
 		}
 		return res.status(200).json(result);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const findStudentByName = async (req, res) => {
+	
+	try {
+		const name = req.query.name;
+
+		const student = await findStudentByNameService(name);
+		
+		if (student.length === 0) {
+			return res.status(404).json({ message: "Student not found."});
+		}
+
+		return res.status(200).json(student);
+		
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
 	}
