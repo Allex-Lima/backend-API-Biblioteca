@@ -1,4 +1,8 @@
-import { createBookService, findAllBooksService } from "../../services/book/book.service.js";
+import { 
+	createBookService, 
+	findBookByIdService, 
+	findAllBooksService 
+} from "../../services/book/book.service.js";
 
 export const createBook = async (req, res) => {
 	try {
@@ -22,5 +26,22 @@ export const findAllBooks = async (req, res) => {
 		return res.json(books);
 	} catch (error) {
 		return res.status(500).json({message: error.message});
+	}
+};
+
+export const findBookById = async (req, res) => {
+	try {
+		const { id } = req.params;
+		
+		const book = await findBookByIdService(id);
+
+		if (!book) {
+			return res.status(404).json({ message: "Id is invalid." });
+		} 
+
+		return res.json(book);
+
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
 	}
 };
