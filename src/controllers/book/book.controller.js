@@ -1,4 +1,4 @@
-import { createBookService } from "../../services/book/book.service.js";
+import { createBookService, findAllBooksService } from "../../services/book/book.service.js";
 
 export const createBook = async (req, res) => {
 	try {
@@ -12,5 +12,15 @@ export const createBook = async (req, res) => {
 
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const findAllBooks = async (req, res) => {
+	try {
+		const books = await findAllBooksService();
+
+		return res.json(books);
+	} catch (error) {
+		return res.status(500).json({message: error.message});
 	}
 };

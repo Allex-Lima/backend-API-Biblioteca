@@ -1,4 +1,4 @@
-import { createBookRepository } from "../../repositories/book/book.repository.js";
+import { createBookRepository, findAllBooksRepository } from "../../repositories/book/book.repository.js";
 import { validationBook } from "../../validate/validate.js";
 
 export const createBookService = async (dataBook) => {
@@ -14,4 +14,15 @@ export const createBookService = async (dataBook) => {
 	} catch (error) {
 		return { message: error.message };
 	}    
+};
+
+export const findAllBooksService = async () => {
+	try {
+		const result = await findAllBooksRepository();
+
+		return result;
+
+	} catch (error) {
+		return { message: error.message };
+	}
 };
