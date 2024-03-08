@@ -1,5 +1,10 @@
-import { createBookRepository, findAllBooksRepository } from "../../repositories/book/book.repository.js";
+import { 
+	createBookRepository, 
+	findBookByIdRepository, 
+	findAllBooksRepository 
+} from "../../repositories/book/book.repository.js";
 import { validationBook } from "../../validate/validate.js";
+import { Types } from "mongoose";
 
 export const createBookService = async (dataBook) => {
 	try {
@@ -21,6 +26,22 @@ export const findAllBooksService = async () => {
 		const result = await findAllBooksRepository();
 
 		return result;
+
+	} catch (error) {
+		return { message: error.message };
+	}
+};
+
+export const findBookByIdService = async (id) => {
+	try {
+		const idIsValid = Types.ObjectId.isValid(id);
+
+		if (!idIsValid) return false;
+
+		const book = await findBookByIdRepository(id);
+
+
+		return book;
 
 	} catch (error) {
 		return { message: error.message };
