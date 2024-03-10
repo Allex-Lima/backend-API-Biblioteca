@@ -1,7 +1,8 @@
 import { 
 	createBookService, 
 	findBookByIdService, 
-	findAllBooksService 
+	findAllBooksService, 
+	findParameterService
 } from "../../services/book/book.service.js";
 
 export const createBook = async (req, res) => {
@@ -38,6 +39,23 @@ export const findBookById = async (req, res) => {
 		if (!book) {
 			return res.status(404).json({ message: "Id is invalid." });
 		} 
+
+		return res.json(book);
+
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const findBookByParameter = async (req, res) => {
+	try {
+		const { name, author, genre } = req.query;
+		
+		const book = await findParameterService(name, author, genre);
+
+		if (!book) {
+			return res.status(404).json({ message: " Book not found."});
+		}
 
 		return res.json(book);
 
