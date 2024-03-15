@@ -3,7 +3,8 @@ import {
 	findBookByIdService, 
 	findAllBooksService, 
 	findParameterService,
-	deleteBookService
+	deleteBookService,
+	updateBookService
 } from "../../services/book/book.service.js";
 
 export const createBook = async (req, res) => {
@@ -82,5 +83,23 @@ export const deleteBook = async (req, res) => {
 		return res.status(200).json({ message: "Book deleted successfully" });
 	} catch (error) {
 		return res.status(500).json({ message: error.message});
+	}
+};
+
+export const updateBook = async (req, res) => {
+	try {
+
+		const { id } = req.params;
+
+		const result = await updateBookService(id, req.body);
+
+		if (result.message) {
+			return res.status(400).json({ message: result.message.replace(/\\/g, "").replace(/"/g, "")});
+		}
+
+		return res.status(201).json(result);
+
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
 	}
 };

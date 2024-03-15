@@ -3,7 +3,8 @@ import {
 	findBookByIdRepository, 
 	findAllBooksRepository, 
 	findParameterRepository,
-	deleteBookRepository
+	deleteBookRepository,
+	updateBookRepository
 } from "../../repositories/book/book.repository.js";
 import { validationBook } from "../../validate/validate.js";
 import { Types } from "mongoose";
@@ -69,6 +70,22 @@ export const deleteBookService = async (id) => {
 	try {
 		const result = await deleteBookRepository(id);
 		
+		return result;
+
+	} catch (error) {
+		return { message: error.message };
+	}
+};
+
+export const updateBookService = async (id, dataBook) => {
+	try {
+
+		const { error } = validationBook.validate(dataBook);
+
+		if (error) return error;
+
+		const result = updateBookRepository(id, dataBook);
+
 		return result;
 
 	} catch (error) {

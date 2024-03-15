@@ -30,3 +30,6 @@ export const findParameterRepository = async (name, author, genre) => {
 };
 
 export const deleteBookRepository = async (id) => Book.findByIdAndDelete(id);
+
+export const updateBookRepository = async (id, dataBook) => Book.findByIdAndUpdate(id, dataBook, {new: true});
+
