@@ -89,7 +89,7 @@ export const deleteStudentService = async (registration) => {
 		}
 		await deleteStudentRepository(registration);
 
-		return { message: "Student deleted successfylly." };
+		return { message: "Student deleted successfully." };
 
 	} catch (error) {
 		return { message: error.message };
