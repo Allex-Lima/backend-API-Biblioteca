@@ -28,3 +28,5 @@ export const findParameterRepository = async (name, author, genre) => {
 		return { message: error.message };
 	}
 };
+
+export const deleteBookRepository = async (id) => Book.findByIdAndDelete(id);

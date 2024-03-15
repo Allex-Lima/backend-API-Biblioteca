@@ -2,7 +2,8 @@ import {
 	createBookService, 
 	findBookByIdService, 
 	findAllBooksService, 
-	findParameterService
+	findParameterService,
+	deleteBookService
 } from "../../services/book/book.service.js";
 
 export const createBook = async (req, res) => {
@@ -61,5 +62,25 @@ export const findBookByParameter = async (req, res) => {
 
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
+	}
+};
+
+export const deleteBook = async (req, res) => {
+	try {
+		const id = req.params.id;
+
+		if (!id) {
+			return res.status(404).json({ message: "Id Book not inserted." });
+		}
+		
+		const result = await deleteBookService(id);
+
+		if (!result) {
+			return res.status(404).json({ message: "Book not found to delete."});
+		}
+
+		return res.status(200).json({ message: "Book deleted successfully" });
+	} catch (error) {
+		return res.status(500).json({ message: error.message});
 	}
 };
