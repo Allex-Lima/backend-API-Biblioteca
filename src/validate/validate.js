@@ -9,6 +9,10 @@ const validationPassword = {
 	password: Joi.string().min(3).required(),
 };
 
+const validationPasswordUpdate = {
+	password: Joi.string().min(3),
+};
+
 const validationRegistration = {
 	registration: Joi.string().required(),
 };
@@ -24,6 +28,11 @@ const validationDataBook = {
 export const validation = Joi.object({
 	...validationBase,
 	...validationPassword,
+});
+
+export const validationUpdate = Joi.object({
+	...validationBase,
+	...validationPasswordUpdate,
 });
 
 export const validationLogin = Joi.object({
