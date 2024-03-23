@@ -4,7 +4,7 @@ export const createStudentRepository = (dataStudent) => Student.create(dataStude
 
 export const findAllStudentRepository = () => Student.find().sort({_id: -1});
 
-export const findStudentByRegistrationRepository = (registration) => Student.findOne({ registration: registration });
+export const findStudentByRegistrationRepository = async(registration) => await Student.findOne({ registration: registration });
 
 export const findStudentByNameRepository = (name) => Student.find({ 
 	name: { $regex: `${name || "" }`, $options: "i"},
