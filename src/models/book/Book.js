@@ -10,7 +10,7 @@ const BookSchema = new Schema({
 		type: String,
 		required: true
 	},
-	edition: {
+	publishing_company: {
 		type: String,
 		required: true
 	},

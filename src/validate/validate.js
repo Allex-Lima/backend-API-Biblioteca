@@ -20,7 +20,7 @@ const validationRegistration = {
 const validationDataBook = {
 	name: Joi.string().min(3).required(),
 	author: Joi.string().required(),
-	edition: Joi.string().required(),
+	publishing_company: Joi.string().required(),
 	genre: Joi.string().required(),
 	amount: Joi.string().required(),
 };

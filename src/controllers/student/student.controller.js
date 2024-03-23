@@ -46,7 +46,7 @@ export const findAllStudent = async (_req, res) => {
 export const findStudentByRegistration = async (req, res) => {
 	try {
 		const { registration } = req.params;
-
+		
 		const result = await findStudentByRegistrationService(registration);
 
 		if (result.length === 0) {
