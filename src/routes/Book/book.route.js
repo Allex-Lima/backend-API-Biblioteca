@@ -8,7 +8,7 @@ import {
 	deleteBook,
 	updateBook,
 } from "../../controllers/book/book.controller.js";
-import { validateBookId } from "../../middlewares/validateBookId.js";
+import { validateId } from "../../middlewares/validateId.js";
 
 const route = Router();
 
@@ -19,9 +19,9 @@ route.get("/user/bookparam", findBookByParameter);
 
 route.get("/user/book/:id", findBookById);
 
-route.delete("/user/book/:id", validateBookId, deleteBook);
-route.delete("/user/book/", validateBookId);
+route.delete("/user/book/:id", validateId, deleteBook);
+route.delete("/user/book/", validateId);
 
-route.patch("/user/book/:id", validateBookId ,updateBook);
+route.patch("/user/book/:id", validateId ,updateBook);
 
 export default route;
